@@ -1,12 +1,12 @@
 
-import DataSync from './src/core/DataSync.js';
-import LoginScreen from './src/screens/loginScreen/index'
+import ThunkSync from './src/App/core/ThunkSync.js';
+import LoginScreen from './src/App/Screens/login/index'
 import React, { useState, useEffect } from "react"
 
 export default () => (
   
-    <DataSync>
+    <ThunkSync>
 <LoginScreen/>
-    </DataSync>
+    </ThunkSync>
  
 )

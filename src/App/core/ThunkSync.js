@@ -9,11 +9,8 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore, persistReducer } from 'redux-persist'
 import { Provider as ReduxProvider } from 'react-redux'
 
-// Integrations
-import * as Linking from 'expo-linking'
-import * as WebBrowser from 'expo-web-browser'
+
 import * as Sentry from 'sentry-expo'
-import { Hub } from 'aws-amplify'
 
 // Import all Janus reducers
 import { reducers } from  '@cliqd/janet'
@@ -21,10 +18,10 @@ import { reducers } from  '@cliqd/janet'
 // Loading element
 import Loading from './Loading'
 
-// Setup Sentry
+// Setup Sentryx
 Sentry.init({
   environment: !!Constants.manifest.releaseChannel ? Constants.manifest.releaseChannel : 'develop',
-  dsn: 'https://c92b896ba4e444f4aee1c4a9e0af542d@o331513.ingest.sentry.io/5419551',
+  dsn: 'https://2b9e4c2abe184b6b9360583c8766c5a4@o923026.ingest.sentry.io/5870111',
   enableInExpoDevelopment: true,
 })
 
@@ -48,7 +45,7 @@ const store = createStore(
 const persistor = persistStore(store)
 
 // Construct a Provider using our Store & Persistor
-function DataSync({ children }) {
+function ThunkSync({ children }) {
   return (
     <ReduxProvider store={store}>
       <PersistGate loading={<Loading />} persistor={persistor}>
@@ -58,4 +55,4 @@ function DataSync({ children }) {
   )
 }
 
-export default DataSync
+export default ThunkSync
