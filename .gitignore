@@ -1,0 +1,11 @@
+node_modules/**/*
+.expo/*
+npm-debug.*
+yarn-error.log
+web-build/
+web-report/
+packages/
+
+
+# macOS
+.DS_Store
