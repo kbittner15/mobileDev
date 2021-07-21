@@ -12,12 +12,7 @@ const loginScreen = ({
   email,
   password,
 }) => {
-useEffect(() => {
 
-  setEmail()
-  setPassword()
-
-}, [])
 
 console.log({email,password})
     return(
