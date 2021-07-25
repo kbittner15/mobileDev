@@ -1,7 +1,6 @@
 import React from 'react'
-import Constants from 'expo-constants'
+import * as firebase from 'firebase'; 
 
-// Redux Integrations
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import createSecureStore from '@neverdull-agency/expo-unlimited-secure-store'
@@ -10,29 +9,43 @@ import { persistStore, persistReducer } from 'redux-persist'
 import { Provider as ReduxProvider } from 'react-redux'
 
 
-import * as Sentry from 'sentry-expo'
+import { getFirestore } from "redux-firestore"
+import 'firebase/auth'
+import 'firebase/database'
+import 'firebase/firestore'
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { createFirestoreInstance } from 'redux-firestore';
 
-// Import all Janus reducers
+
 import { reducers } from  '@cliqd/janet'
 
-// Loading element
 import Loading from './Loading'
 
-// Setup Sentryx
-Sentry.init({
-  environment: !!Constants.manifest.releaseChannel ? Constants.manifest.releaseChannel : 'develop',
-  dsn: 'https://2b9e4c2abe184b6b9360583c8766c5a4@o923026.ingest.sentry.io/5870111',
-  enableInExpoDevelopment: true,
-})
 
 
-// Dependency Injection for actions
-const services = {
-  sentry: Sentry.Native,
+export const fbConfig = {  
+apiKey: "AIzaSyAS_v-QVi_3v84VFOnkF4nJ0-g0Ye4OwSk",
+authDomain: "cliqd-19df5.firebaseapp.com",
+databaseURL: "https://cliqd-19df5-default-rtdb.firebaseio.com",
+projectId: "cliqd-19df5",
+storageBucket: "cliqd-19df5.appspot.com",
+messagingSenderId: "440529118050",
+appId: "1:440529118050:web:1788a1ed3477f50664423b",
+measurementId: "G-DB5HZKE6DP"}
+
+export const rrfConfig = {
+  userProfile: 'users',
+  useFirestoreForProfile: true // Store in Firestore instead of Real Time DB
 }
 
-// Construct the Store & Persistor
+
+const middlewares = [
+thunk.withExtraArgument( getFirestore )
+]
+
+
 const store = createStore(
+ 
   persistReducer(
     {
       key: 'root',
@@ -40,16 +53,34 @@ const store = createStore(
     },
     combineReducers(reducers)
   ),
-  applyMiddleware(thunk.withExtraArgument(services))
+  applyMiddleware(...middlewares),
+    
+
 )
+
 const persistor = persistStore(store)
 
 // Construct a Provider using our Store & Persistor
 function ThunkSync({ children }) {
+  if (!firebase.apps.length) {
+    firebase.initializeApp(fbConfig);
+    firebase.firestore();
+ }else {
+    firebase.app();
+    firebase.firestore();
+ // if already initialized, use that one
+ }
   return (
     <ReduxProvider store={store}>
       <PersistGate loading={<Loading />} persistor={persistor}>
-        {children}
+         <ReactReduxFirebaseProvider
+            firebase={firebase}
+            config={rrfConfig}
+            dispatch={store.dispatch}
+            createFirestoreInstance={createFirestoreInstance}
+          > 
+              {children}
+          </ReactReduxFirebaseProvider>
       </PersistGate>
     </ReduxProvider>
   )

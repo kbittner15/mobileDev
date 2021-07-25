@@ -3,8 +3,6 @@ import { Text, StyleSheet, View, Button, TouchableOpacity, Image, TextInput } fr
 import styles from '../Styles/styles.js'
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import LoginModeScreen from '../loginScreen/index.js'
-import DataSync from '../../core/DataSync.js';
 
 // import { useFonts } from 'expo-font';
 

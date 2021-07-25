@@ -3,10 +3,10 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Messages from '../../screens/HomePage/RegularMode/tabs/RegMessagesTab'
-import Feed from '../../screens/HomePage/RegularMode/tabs/RegFeedTab.js'
-import Profile from '../../screens/HomePage/RegularMode/tabs/RegProfileTab.js'
-import Matches from '../../screens/HomePage/RegularMode/tabs/RegMatchesTab.js'
+import Messages from '../../Screens/HomePage/RegularMode/tabs/RegMessagesTab'
+import Feed from '../../Screens/HomePage/RegularMode/tabs/RegFeedTab.js'
+import Profile from '../../Screens/HomePage/RegularMode/tabs/RegProfileTab.js'
+import Matches from '../../Screens/HomePage/RegularMode/tabs/RegMatchesTab.js'
 
 const Tab = createBottomTabNavigator();
 
