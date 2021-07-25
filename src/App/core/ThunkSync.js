@@ -10,7 +10,6 @@ import { Provider as ReduxProvider } from 'react-redux'
 
 
 import { getFirestore } from "redux-firestore"
-
 import 'firebase/auth'
 import 'firebase/database'
 import 'firebase/firestore'
