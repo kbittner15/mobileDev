@@ -13,7 +13,6 @@ const loginScreen = ({
   currentUser,
 }) => {
 
-  console.log({currentUser})
 
   const verify = () => {
     if(currentUser){
