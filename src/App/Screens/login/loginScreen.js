@@ -13,16 +13,12 @@ const loginScreen = ({
   currentUser,
 }) => {
 
-  console.log({currentUser})
-
   const verify = () => {
     if(currentUser){
       const { navigate } = this.props.navigation;
        navigate("Home")
     }else{
-      return(
-        <Text>Sorry, your email or password is incorrect</Text>
-      )
+      alert("Sorry, your email or password is incorrect")
     }
   }
 
