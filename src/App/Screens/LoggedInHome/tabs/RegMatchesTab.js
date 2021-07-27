@@ -1,14 +1,14 @@
 import * as React from 'react';
-import styles from '../../../Styles/styles.js'
+import styles from '../../Styles/styles.js'
 import { Text, View } from 'react-native';
 
 
-const Messages = ({ navigation }) =>  {
+const Matches = ({ navigation }) => {
     return (
       <View style={styles.toolBarIcons}>
-        <Text>Messages!</Text>
+        <Text>Matches!</Text>
       </View>
     );
   }
 
-  export default Messages;
+  export default Matches;
