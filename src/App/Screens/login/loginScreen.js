@@ -12,15 +12,7 @@ const loginScreen = ({
   password,
   currentUser,
 }) => {
-
-  const verify = () => {
-    if(currentUser){
-      const { navigate } = this.props.navigation;
-       navigate("Home")
-    }else{
-      alert("Sorry, your email or password is incorrect")
-    }
-  }
+  console.log({data:currentUser, type: typeof currentUser})
 
   return(     
       <View style = {{paddingTop:200}}>
@@ -42,7 +34,6 @@ const loginScreen = ({
           <TouchableOpacity 
           onPress={() => {
           logUserIn()
-          verify()
           }}
           style={styles.loginContainter}>
                   <Text style={styles.loginText}>
@@ -71,4 +62,5 @@ export default connect(
       logUserIn: () => dispatch(actions.user.LogUserIn()),
       ...ownProps
     }),
+
   )(loginScreen)

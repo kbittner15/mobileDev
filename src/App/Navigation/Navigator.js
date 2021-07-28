@@ -11,8 +11,6 @@ import NotLoggedInNav from "./NotLoggedInNav"
 const Navigator = ({
   currentUser,
 }) => {
-
-
   return(     
      
    <Fragment>
