@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { connect, actions } from '@cliqd/janet'
-import { View, Text,  TextInput, TouchableOpacity ,StyleSheet} from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet} from "react-native";
 
 import styles from '../Styles/styles'
 
@@ -14,11 +14,18 @@ const loginScreen = ({
 }) => {
 
   const verify = () => {
+    console.log(typeof currentUser)
     if(currentUser){
       const { navigate } = this.props.navigation;
+      console.log("Logged in")
+      console.log({currentUser})
        navigate("Home")
     }else{
-      alert("Sorry, your email or password is incorrect")
+      console.log({currentUser})
+      console.log({email})
+      console.log({password})
+      console.log("Please enter a correct username and password.")
+      // alert("Please enter a correct username and password.")
     }
   }
 
