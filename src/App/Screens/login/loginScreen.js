@@ -11,8 +11,16 @@ const loginScreen = ({
   email,
   password,
   currentUser,
+  getCurrentUser,
 }) => {
-  console.log({data:currentUser, type: typeof currentUser})
+  
+  
+  const setCurrentUser = () =>{
+    logUserIn()
+    let myUser = Promise.resolve(getCurrentUser())
+    console.log({myUser})
+  
+}
 
   return(     
       <View style = {{paddingTop:200}}>
@@ -33,7 +41,7 @@ const loginScreen = ({
               />
           <TouchableOpacity 
           onPress={() => {
-          logUserIn()
+          setCurrentUser()
           }}
           style={styles.loginContainter}>
                   <Text style={styles.loginText}>
@@ -60,6 +68,7 @@ export default connect(
       setEmail: (email) => dispatch(actions.login.SetEmail(email)),
       setPassword: (password) => dispatch(actions.login.SetPassword(password)),
       logUserIn: () => dispatch(actions.user.LogUserIn()),
+      getCurrentUser: () => dispatch(actions.user.GetCurrentUser()),
       ...ownProps
     }),
 

@@ -1,37 +1,111 @@
 import React, { useState } from 'react';
 import { Text, StyleSheet, View, Button, TouchableOpacity, TextInput} from "react-native";
+import { connect, actions} from '@cliqd/janet'
+import { user } from '../../../../packages/Janet/dist/App/api.actions';
 
-const NewActScreen = () => {
-    const [text, setText] = useState('');
-    
+import styles from '../Styles/styles'
+
+const NewActScreen = ({
+    signUserIn,
+    setFirst,
+    setLast,
+    setAge,
+    setPhone,
+    setEmail,
+    setSex,
+    setUserHeight,
+    setEducation,
+    setReligion,
+    setPassword,
+    firstName,
+    lastName,
+    age,
+    email,
+    phoneNumber,
+    sex,
+    userHeight,
+    education,
+    religion,
+    password,
+    currentUser,
+    getCurrentUser,
+}) => {
+
+
+    console.log("Sign Up")
+
+   
+
+    const setCurrentUser = () =>{
+        signUserIn()
+    }
     return (
-    <View>
+    <View style = {{ paddingTop: 100 }}>
        
-        <Text style={styles.textStyle}>FirstName</Text>
-        <TextInput style={styles.inputStyle} placeholder="FirstName" onChangeText={text => setText(text)} defaultValue={text}/>
-        <Text style={styles.textStyle}>Lastname</Text>
-        <TextInput style={styles.inputStyle} placeholder="LastName" onChangeText={text => setText(text)} defaultValue={text}/>
-        <Text style={styles.textStyle}>Age</Text>
-        <TextInput style={styles.inputStyle} placeholder="Age" onChangeText={text => setText(text)} defaultValue={text}/>
-        <Text style={styles.textStyle}>Description</Text>
-        <TextInput style={styles.inputStyle} placeholder="Description" onChangeText={text => setText(text)} defaultValue={text}/>
-        <Text style={styles.textStyle}>Images</Text>
-        <TextInput style={styles.inputStyle} placeholder="ImagesPaceholder" onChangeText={text => setText(text)} defaultValue={text}/>
+        <Text>FirstName</Text>
+        <TextInput placeholder="FirstName" onChangeText={(firstName) => setFirst(firstName)} value={firstName}/>
+        <Text >Lastname</Text>
+        <TextInput  placeholder="LastName" onChangeText={(lastName) => setLast(lastName)} value={lastName}/>
+        <Text >Age</Text>
+        <TextInput  placeholder="Age" onChangeText={(age) => setAge(age)} value={age}/>
+        <Text >email</Text>
+        <TextInput  placeholder="Email" onChangeText={(email) => setEmail(email)} value={email}/>
+        <Text >phoneNumber</Text>
+        <TextInput  placeholder="PhoneNumber" onChangeText={(phoneNumber) => setPhone(phoneNumber)} value={phoneNumber}/>
+        <Text >sex</Text>
+        <TextInput placeholder="Sex" onChangeText={(sex) => setSex(sex)} value={sex}/>
+        <Text >userHeight</Text>
+        <TextInput  placeholder="userHeight" onChangeText={(userHeight) => setUserHeight(userHeight)} value={userHeight}/>
+        <Text >education</Text>
+        <TextInput placeholder="Education" onChangeText={(education) => setEducation(education)} value={education}/>
+        <Text >religion</Text>
+        <TextInput  placeholder="Religion" onChangeText={(religion) => setReligion(religion)} value={religion}/>
+        <Text>Password</Text>
+        <TextInput placeholder="Password" onChangeText={(password) => setPassword(password)} value={password}/>
+       
+        <TouchableOpacity 
+          onPress={() => {
+            setCurrentUser()
+          }}
+          style={styles.loginContainter}>
+                  <Text style={styles.loginText}>
+                      Sign in user
+                  </Text>
+          </TouchableOpacity>
+        
         
     </View>
     );
 };
 
-const styles = StyleSheet.create({
- 
-    textStyle: {
-        fontSize: 30,
-        
-    },
-    inputStyle: {
-        height: 30,
-      
-    }
-});
 
-export default NewActScreen;
+export default connect(
+    ({signupReducer, userReducer})=>({
+        firstName: signupReducer.firstName,
+        lastName: signupReducer.lastName,
+        age: signupReducer.birthDate,
+        email: signupReducer.email,
+        phoneNumber: signupReducer.phoneNumber,
+        sex: signupReducer.sex,
+        userHeight: signupReducer.userHeight,
+        education: signupReducer.education,
+        religion: signupReducer.religion,
+        ethnicity: signupReducer.ethnicity, 
+        password: signupReducer.password,
+        currentUser: userReducer.currentUser,
+    }),
+    (dispatch, ownProps) => ({
+        setFirst: (firstName) => dispatch(actions.signUp.SetFirst(firstName)),
+        setLast: (lastName) => dispatch(actions.signUp.SetLast(lastName)),
+        setAge: (age) => dispatch(actions.signUp.SetAge(age)),
+        setPhone: (phoneNumber) => dispatch(actions.signUp.SetPhone(phoneNumber)),
+        setEmail: (email) => dispatch(actions.signUp.SetEmail(email)),
+        setSex: (sex) => dispatch(actions.signUp.SetSex(sex)),
+        setUserHeight: (userHeight) => dispatch(actions.signUp.SetUserHeight(userHeight)),
+        setEducation: (education) => dispatch(actions.signUp.SetEducation(education)),
+        setReligion: (religion) => dispatch(actions.signUp.SetReligion(religion)),
+        setPassword: (password) => dispatch(actions.signUp.SetPassword(password)),
+        signUserIn: () => dispatch(actions.user.SignUserIn()),
+       
+    })
+)(NewActScreen)
