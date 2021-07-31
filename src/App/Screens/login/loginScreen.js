@@ -11,8 +11,15 @@ const loginScreen = ({
   email,
   password,
   currentUser,
+  myUser
 }) => {
   console.log({data:currentUser, type: typeof currentUser})
+  
+  const validate = () => {
+    logUserIn()
+  }
+
+
 
   return(     
       <View style = {{paddingTop:200}}>
@@ -33,7 +40,8 @@ const loginScreen = ({
               />
           <TouchableOpacity 
           onPress={() => {
-          logUserIn()
+            validate()
+         
           }}
           style={styles.loginContainter}>
                   <Text style={styles.loginText}>
