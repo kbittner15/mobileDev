@@ -6,7 +6,7 @@ import { user } from '../../../../packages/Janet/dist/App/api.actions';
 import styles from '../Styles/styles'
 
 const NewActScreen = ({
-    signUserIn,
+    signUserUp,
     setFirst,
     setLast,
     setAge,
@@ -37,7 +37,7 @@ const NewActScreen = ({
    
 
     const setCurrentUser = () =>{
-        signUserIn()
+        signUserUp()
     }
     return (
     <View style = {{ paddingTop: 100 }}>
@@ -105,7 +105,7 @@ export default connect(
         setEducation: (education) => dispatch(actions.signUp.SetEducation(education)),
         setReligion: (religion) => dispatch(actions.signUp.SetReligion(religion)),
         setPassword: (password) => dispatch(actions.signUp.SetPassword(password)),
-        signUserIn: () => dispatch(actions.user.SignUserIn()),
+        signUserUp: () => dispatch(actions.user.SignUserUp()),
        
     })
 )(NewActScreen)

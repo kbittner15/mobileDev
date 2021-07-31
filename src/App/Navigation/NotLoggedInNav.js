@@ -13,7 +13,7 @@ const Navigator = createStackNavigator(
     SignUp: {screen: NewActScreen},
   },
   {
-    initialRouteName: 'Welcome',
+    initialRouteName: 'Login',
     headerMode: 'none'
   }
 );
