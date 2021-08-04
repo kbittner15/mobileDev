@@ -1,33 +1,72 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import styles from '../../Styles/styles.js'
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import Cards from '../../../Components/Cards'
 import { connect, actions} from '@cliqd/janet'
+import { render } from 'react-dom';
 
 
 const Feed = ({ 
   navigation, 
-  peopleCards,
   getUserCards,
+  peopleCards,
 }) => {
 
-  useEffect(() => {
-    getUserCards()  
-  },[]);
 
+ 
+const like = card =>{
+  try{
+    console.log("Like")
+  }
+  catch(e){
+    console.log("Ran out of cards.")
+    alert("Ran out of cards.")
+  }
+}
 
+const disLike = card => {
+  try{
+    console.log("Dislike")
+  }
+  catch(e){
+    console.log("Ran out of cards.")
+    alert("Ran out of cards.")
+  }
+}
+
+let i = 0
 useEffect(() => {
-  console.log({peopleCards})
-},[peopleCards])
+  getUserCards()  
+},[]);
+
+useEffect(()=>{
+  if (!peopleCards){
+    getUserCards()  
+    i = i + 1
+  }
+}, [i])
+
 
     return (
-      <View style={styles.CardIcons}>
-          
-        
-        {/*
-        <Cards />
-        */}
-      </View>
+      <Fragment>
+    
+        <View style={styles.CardIcons}>
+        <TouchableOpacity onPress = {() => like()}
+            style={styles.signupContainter}>
+            <Text style={styles.signupText}>
+                Like
+            </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress = {() => disLike()}
+            style={styles.loginContainter}>
+            <Text style={styles.loginText}>
+                Dislike
+            </Text>
+        </TouchableOpacity>
+        </View>
+
+            
+      </Fragment>
      
     );
   }
@@ -37,7 +76,7 @@ useEffect(() => {
       peopleCards: userReducer.peopleCards,
     }),
     (dispatch, ownProps) => ({
-      getUserCards: () => dispatch(actions.user.GetUserCards())
-
+      getUserCards: () => dispatch(actions.user.GetUserCards()),
     })
+  
 )(Feed)

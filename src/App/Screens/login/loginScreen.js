@@ -18,7 +18,7 @@ const loginScreen = ({
   const setCurrentUser = () =>{
     logUserIn()
     let myUser = Promise.resolve(getCurrentUser())
-    console.log({myUser})
+   
   
 }
 
