@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         borderRadius: 100,
     },
-    signupContainter: {
+    signupContainter:{
         backgroundColor: "#05AFF2",
         borderRadius: 10,
         paddingVertical: 10,
