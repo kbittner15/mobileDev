@@ -6,74 +6,9 @@ import { user } from '../../../../packages/Janet/dist/App/api.actions';
 import styles from '../Styles/styles'
 import { createStackNavigator } from 'react-navigation-stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { setCurrentUser } from '@cliqd/janet/dist/App/Screens/user/actions';
 
-const Stack = createStackNavigator()
-function NewPic({navigation}){
-    return (
-        <View styles={{ paddingTop: 100 }}>
-            <Text>FirstName</Text>
-            <TextInput placeholder="FirstName" onChangeText={(firstName) => setFirst(firstName)} value={firstName}/>
-            <Text >Lastname</Text>
-            <TextInput  placeholder="LastName" onChangeText={(lastName) => setLast(lastName)} value={lastName}/>
-            <Text >Age</Text>
-            <TextInput  placeholder="Age" onChangeText={(age) => setAge(age)} value={age}/>
-            <Text >email</Text>
-            <TextInput  placeholder="Email" onChangeText={(email) => setEmail(email)} value={email}/>
-            <Text >phoneNumber</Text>
-            <TextInput  placeholder="PhoneNumber" onChangeText={(phoneNumber) => setPhone(phoneNumber)} value={phoneNumber}/>
-            <Text>description</Text>
-            <TextInput placeholder="Description" onChangeText={(description) => setPassword(description)} value={description}/>
-            <Text>Password</Text>
-            <TextInput placeholder="Password" onChangeText={(password) => setPassword(password)} value={password}/>
-            <Button title='go to next page'
-                onPress={()=> {navigation.navigate('Home')}}/>
-        </View>
-    );
-}
-function Home({navigation}){
-    return(
-        <View styles={{paddingTop:100}}>
-             <Text >sex</Text>
-             <TextInput placeholder="Sex" onChangeText={(sex) => setSex(sex)} value={sex}/>
-             <Text >userHeight</Text>
-             <TextInput  placeholder="userHeight" onChangeText={(userHeight) => setUserHeight(userHeight)} value={userHeight}/>
-             <Text >education</Text>
-             <TextInput placeholder="Education" onChangeText={(education) => setEducation(education)} value={education}/>
-             <Text>hometown</Text>
-             <TextInput placeholder="Hometown" onChangeText={(hometown) => setPassword(hometown)} value={hometown}/>
-             <Text>ethnicity</Text>
-             <TextInput placeholder="Ethnicity" onChangeText={(ethnicity) => setPassword(ethnicity)} value={ethnicity}/>
-             <Button title='go to next page'
-                onPress={()=>{navigation.navigate('Questions')}}/>
-
-        </View>
-    );
-}
-function Questions({navigation}){
-    return(
-        <View>
-             <Text>family</Text>
-             <TextInput placeholder="Family" onChangeText={(family) => setPassword(family)} value={family}/>
-             <Text>politics</Text>
-             <TextInput placeholder="Politics" onChangeText={(politics) => setPassword(politics)} value={politics}/>
-             <Text>future</Text>
-             <TextInput placeholder="Future" onChangeText={(future) => setPassword(future)} value={future}/>
-             <Text>substances</Text>
-             <TextInput placeholder="Substances" onChangeText={(substances) => setPassword(substances)} value={substances}/>
-             <Text>media</Text>
-             <TextInput placeholder="Media" onChangeText={(media) => setPassword(media)} value={media}/>
-             <Text>pets</Text>
-             <TextInput placeholder="Pets" onChangeText={(pets) => setPassword(pets)} value={pets}/>
-             <Text>religion</Text>
-             <TextInput  placeholder="Religion" onChangeText={(religion) => setReligion(religion)} value={religion}/>
-            <Button title ='sign up '
-                onPress={()=>{setCurrentUser()}}/>
-        
-
-        </View>
-    );
-}
 
 const NewActScreen = ({
     signUserIn,
@@ -127,14 +62,26 @@ const NewActScreen = ({
     const setCurrentUser = () =>{
         signUserIn()
     }
+    const navigation = useNavigation();
     return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName='Picture'>
-                <Stack.Screen name='Home' component={Home}/>
-                <Stack.Screen name='Picture' component={NewPic}/>
-                <Stack.Screen name='Questions' component={Questions}/>
-            </Stack.Navigator>
-        </NavigationContainer>
+        <View styles={{ paddingTop: 100 }}>
+            <Text>FirstName</Text>
+            <TextInput placeholder="FirstName" onChangeText={(firstName) => setFirst(firstName)} value={firstName}/>
+            <Text >Lastname</Text>
+            <TextInput  placeholder="LastName" onChangeText={(lastName) => setLast(lastName)} value={lastName}/>
+            <Text >Age</Text>
+            <TextInput  placeholder="Age" onChangeText={(age) => setAge(age)} value={age}/>
+            <Text >email</Text>
+            <TextInput  placeholder="Email" onChangeText={(email) => setEmail(email)} value={email}/>
+            <Text >phoneNumber</Text>
+            <TextInput  placeholder="PhoneNumber" onChangeText={(phoneNumber) => setPhone(phoneNumber)} value={phoneNumber}/>
+            <Text>description</Text>
+            <TextInput placeholder="Description" onChangeText={(description) => setPassword(description)} value={description}/>
+            <Text>Password</Text>
+            <TextInput placeholder="Password" onChangeText={(password) => setPassword(password)} value={password}/>
+            <Button title='go to next page'
+                onPress={()=> {navigation.navigate('Info')}}/>
+        </View>
      );
 };
 
